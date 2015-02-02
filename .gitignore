@@ -1,0 +1,5 @@
+config/application.properties
+.settings/
+psd/
+.classpath
+.project
