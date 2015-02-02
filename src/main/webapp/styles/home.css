@@ -1,0 +1,165 @@
+#introText {
+    font-family: "Century Gothic Bold", 'Lucida Grande', Helvetica, 'Helvetica Neue', Arial, Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 820px;
+    text-align: center;
+}
+
+#introText .left {
+    color: #64C6E8;
+}
+#introText .right {
+    color: #93D947;
+}
+
+#introTextSmall {
+    color: #C4C4C4;
+    font-size: 1.3em;
+    font-family: "Century Gothic", 'Lucida Grande', Helvetica, 'Helvetica Neue', Arial, Tahoma, sans-serif;
+    width: 670px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.homeItems {
+    height: 230px;
+    overflow: hidden;
+    position: relative;
+    clear: both;
+}
+
+.homeItems .item {
+    width: 152px;
+    padding: 20px 8px 0px 8px;
+    float: left;
+    text-align: center;
+    height: 190px;
+}
+
+.item p {
+    text-align: left;
+    color: #5C5C5C;
+    font-size: 12px;
+}
+.item h2 {
+    margin-top: 15px;
+    font-family: Bebas;
+    font-size: 18px;
+    font-weight: normal;
+    color: #095878;
+    height: 45px;
+}
+
+.itemIcon {
+    margin-right: auto;
+    margin-left: auto;
+    width: 32px;
+    height: 32px;
+}
+
+.homeLink {
+    -moz-border-radius: 30px;
+    -webkit-border-radius: 30px;
+    border-radius: 30px;
+    font-size: 2.5em;
+    color: white !important;
+    padding: 0px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 169px;
+    height: 55px;
+    float: left;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    -webkit-background-size: 100%;
+    background-size: 100% 100%;
+    text-shadow: 1px 1px 3px grey;
+}
+
+#loginLink {
+    background-image: url(../images/button/button_green.png);
+    border-color: #BEEA78;
+    font-family: Bebas;
+    background-repeat: repeat;
+}
+#loginLinkHolder .ui-state-hover {
+    background-image: url(../images/button/button_green_hover.png);
+}
+#loginLinkHolder .ui-state-active {
+    background-image: url(../images/button/button_green_pressed.png);
+}
+#signupLink {
+    margin-right: 40px;
+    font-family: Bebas;
+    background-repeat: repeat;
+}
+
+#loginSignupContainer {
+    clear: both;
+    width: 970px;
+    margin-left: -65px;
+    padding-left: -65px;
+    background-color: #E8E8E8;
+    overflow: hidden;
+    border: 5px solid rgba(125, 125, 125, 0.3);
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
+    box-shadow: 2px 2px 2px #C3D1D9;
+    -moz-box-shadow: 2px 2px 2px #C3D1D9;
+    -webkit-box-shadow: 2px 2px 2px #C3D1D9;
+    border-radius: 7px;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-box-shadow:inset 0 0 2px grey;
+    -webkit-box-shadow:inset 0 0 2px grey;
+    box-shadow:inset 0 0 2px grey;
+}
+
+.underShade {
+    width: 889px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#featureTourLink {
+    font-family: "Century Gothic Bold", 'Lucida Grande', Helvetica, 'Helvetica Neue', Arial, Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    text-decoration: underline;
+}
+
+#homeWrapper {
+    width: 890px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.homeExtraLink {
+    width: 545px;
+    font-size: 1.8em;
+    height: 40px;
+    color: #64C6E8;
+}
+#comparisonPanel {
+    display: none;
+    margin-right: auto;
+    margin-left: auto;
+    width: 980px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
+    border: 7px solid rgba(255, 255, 255, 0.5);
+}

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+    http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+    <context:component-scan base-package="com.welshare.web" />
+
+    <!--
+        Using a bean with a custom id (rather than context:prop...
+        in order to be able to expose it to JSPs)
+     -->
+    <bean id="appProperties" class="com.welshare.web.util.PropertiesMap">
+        <property name="locations">
+            <util:list>
+                <value>file:${config.location}/application.properties</value>
+                <value>classpath:/properties/welshare.properties</value>
+            </util:list>
+        </property>
+    </bean>
+
+    <!-- mapping images, js and styles with separate mappings. Otherwise it conflicts with ResourceController mapping. -->
+    <mvc:resources mapping="/static/${assets.version}/images/**" location="/images/" cache-period="${static.resources.cache.period}" />
+    <mvc:resources mapping="/static/${assets.version}/js/**" location="/js/" cache-period="${static.resources.cache.period}" />
+    <mvc:resources mapping="/static/${assets.version}/styles/**" location="/styles/" cache-period="${static.resources.cache.period}" />
+    <mvc:resources mapping="/static/${assets.version}/styles/font/**" location="/styles/fonts" cache-period="${static.resources.cache.period}" />
+
+    <!-- also map images without asset version, so that they can be referred to constantly by 3rd party sites -->
+    <mvc:resources mapping="/static/images/**" location="/images/" cache-period="${static.resources.cache.period}" />
+    <mvc:resources mapping="*.txt" location="/WEB-INF/jsp/txt/" />
+
+    <!-- setting all desired beans that are otherwise automaticaly defined by
+        mvc:annotation-driven -->
+    <!-- JSR-303 support will be detected on classpath and enabled automatically -->
+    <bean id="validator"
+        class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+    <!-- Conversion -->
+    <bean id="conversionService"
+        class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
+
+    <!-- - This bean resolves specific types of exceptions to corresponding
+        logical - view names for error views. The default behaviour of DispatcherServlet
+        - is to propagate all exceptions to the servlet container: this will happen
+        - here with all other types of exceptions. -->
+    <!-- bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings"> <props> <prop key="org.springframework.web.servlet.PageNotFound">pageNotFound</prop>
+        <prop key="org.springframework.dao.DataAccessException">dataAccessFailure</prop>
+        <prop key="org.springframework.transaction.TransactionException">dataAccessFailure</prop>
+        </props> </property> </bean -->
+
+    <bean
+        class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="webBindingInitializer">
+            <bean class="com.welshare.web.util.CommonWebBindingInitializer" />
+        </property>
+        <property name="messageConverters">
+            <list>
+                <bean
+                    class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+                <bean
+                    class="org.springframework.http.converter.ResourceHttpMessageConverter" />
+                <bean
+                    class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+                <bean
+                    class="org.springframework.http.converter.StringHttpMessageConverter" />
+                <bean
+                    class="org.springframework.http.converter.feed.AtomFeedHttpMessageConverter" />
+                <bean
+                    class="org.springframework.http.converter.feed.RssChannelHttpMessageConverter" />
+                <bean
+                    class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+                <bean
+                    class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter" />
+                <!-- bean class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter"
+                    / -->
+            </list>
+        </property>
+        <property name="customArgumentResolvers">
+            <list>
+                <ref bean="sessionAttributeWebArgumentResolver" />
+                <ref bean="requestAttributeWebArgumentResolver" />
+            </list>
+        </property>
+        <property name="synchronizeOnSession" value="true" />
+    </bean>
+
+    <!-- - The BeanNameViewResolver is used to pick up the visits view name
+        (below). - It has the order property set to 1, which means that this will
+        - be the first view resolver to be used after the delegating content - negotiating
+        view resolver. -->
+
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
+        p:order="0" />
+
+    <!-- - This bean configures the 'prefix' and 'suffix' properties of - InternalResourceViewResolver,
+        which resolves logical view names - returned by Controllers. For example,
+        a logical view name of "signup" - will be mapped to "/WEB-INF/jsp/signup.jsp". -->
+    <bean id="viewResolver"
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass"
+            value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+        <property name="order" value="1" />
+    </bean>
+
+    <!-- export the properties to the servletContext, so that they are accessible everywhere -->
+    <bean id="servletContextAttributeExporter" class="org.springframework.web.context.support.ServletContextAttributeExporter">
+        <property name="attributes">
+            <map>
+                <entry key="appProperties">
+                    <ref bean="appProperties" />
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="localeResolver"
+        class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver" />
+
+    <bean id="handlerMapping"
+        class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <ref bean="shortDomainInterceptor" />
+                <ref bean="autoLoginInterceptor" />
+                <ref bean="i18nShorthandInterceptor" />
+                <ref bean="sslInterceptor" />
+                <ref bean="adminInterceptor" />
+                <ref bean="socialNetworkStatusInterceptor" />
+                <ref bean="requestScopedDataInterceptor" />
+                <ref bean="cacheInterceptor" />
+                <bean
+                    class="org.springframework.web.servlet.handler.ConversionServiceExposingInterceptor">
+                    <constructor-arg ref="conversionService" />
+                </bean>
+            </list>
+        </property>
+        <property name="useDefaultSuffixPattern" value="false" />
+    </bean>
+
+    <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- one of the properties available; the maximum file size in bytes -->
+        <property name="maxUploadSize" value="2000000" />
+    </bean>
+
+    <bean id="openIdConsumerManager"
+        class="org.openid4java.consumer.ConsumerManager" />
+
+    <util:list id="secureLocations">
+        <value>/login</value>
+        <value>/signup</value>
+        <value>/admin/**</value>
+    </util:list>
+</beans>

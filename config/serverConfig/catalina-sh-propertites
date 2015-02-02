@@ -1,0 +1,2 @@
+CATALINA_OPTS="$CATALINA_OPTS -server -Xms100m -Xmx350m -XX:MaxPermSize=165m -Dconfig.location=/welshare/config/production"
+CATALINA_OPTS="$CATALINA_OPTS -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=true -Dcom.sun.management.jmxremote.password.file=/opt/tomcat/conf/jmxremote.password -Dcom.sun.management.jmxremote.access.file=/opt/tomcat/conf/jmxremote.access -Djava.rmi.server.hostname=welshare.com"

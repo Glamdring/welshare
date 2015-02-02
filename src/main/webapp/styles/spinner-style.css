@@ -1,0 +1,71 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	color: #000;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #903;
+	text-decoration: underline;
+}
+
+h1 {
+	font-size: 15pt;
+	padding: 6px;
+}
+
+h2 {
+	font-size: 13pt;
+}
+
+h3 {
+	font-size: 11pt;
+}
+
+label {
+	font-weight: 700;
+	width: 140px;
+	display: block;
+	float: left;
+	padding-left: 4px;
+}
+
+p {
+	margin: 20px;
+}
+
+#main {
+	width: 700px;
+	margin: 20px 50%;
+	left: -350px;
+	right: -350px;
+	padding: 10px 20px;
+	position: absolute;
+}
+
+#example {
+	background-color: white;
+	padding: 10px
+}
+
+#example input {
+	width: 100px
+}
+
+#example table.grid {
+	border-collapse: separate;
+	border-spacing: 0px;
+}
+
+#example table.grid td {
+	padding: 3px 5px;
+	text-align: left
+}
+
+#footer {
+	text-align: center;
+}

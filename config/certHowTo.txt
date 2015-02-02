@@ -1,0 +1,5 @@
+- obtain a decrypted key
+- obtain a .cer file
+- use the toolbox of startcom to generate a PFX file
+- make sure jce_policy-6.zip is present in jre/lib/security
+- import the PFX file (as "key pair") using portecle into store.jks

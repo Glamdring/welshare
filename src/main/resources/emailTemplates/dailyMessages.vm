@@ -1,0 +1,67 @@
+<html>
+<body>
+<div style="font-family: 'Lucida Grande', Helvetica, 'Helvetica Neue', Arial, Tahoma, sans-serif; font-size: 14px;">
+<h4>$msg.dailyTopMessagesTitle</h4>
+<a style="font-size: 9px;" href="$baseUrl/settings/dailyEmailUnsubscribe/$currentUser.id">$msg.unsubscribe</a>
+
+#set ($pictureType = "small")
+#foreach ($message in $messages)
+    #if ($message.Reply)
+        #set ($message = $message.OriginalMessage)
+    #end
+    <div style="padding-top: 7px; padding-bottom: 7px; border-top-style: solid; border-bottom-style: none; border-left-style: none; border-right-style: none; border-collapse: collapse; border-width: 1px; border-color: #EEEEEE; position: relative;">
+        <span>
+            #set ($user = $message.Author)
+            #set ($size = 48)
+            #set ($cssStyle = " width: 48px; height: 48px; vertical-align: middle; display: block; float: left; position: relative; margin-right: 5px;")
+            #parse ("profilePicture.vm")
+        </span>
+
+        <div style=" display: block; position: relative; float: left; padding-top: 2px; padding-bottom: 2px; word-wrap: break-word; width: 90%;">
+            #if ($message.Author.External)
+                #set ($targetUrl = "${baseUrl}/user/external/${message.Author.ExternalId}")
+            #else
+                #set ($targetUrl = "${baseUrl}/${message.Author.Username}")
+            #end
+            <a style="font-weight: bold;" href="$targetUrl" target="_blank">
+                $message.Author.Names
+                #if ($message.Author.Username.isEmpty())
+                    ($message.Author.Username)
+                #end
+            </a>
+            #if (!$message.Liking || $message.Data.ExternalId)
+                <div>
+                    <span>
+                        $message.Data.FormattedText
+                    </span>
+                </div>
+            #else
+                #parse ("likeMessage.vm")
+            #end
+            #parse ("messageMedia.vm")
+            <div>
+                <div>
+                    #if ($message.Data.ExternalId)
+                        #set ($messageUrl = "${baseUrl}/message/external/${message.Data.ExternalId}")
+                    #else
+                        #set ($messageUrl = "${baseUrl}/message/${message.Id}")
+                    #end
+                    <a href="$messageUrl">$msg.viewMessage</a><br />
+                    <span style=" font-size: 0.8em;">$web.formatDateTime($message.DateTime, "HH:mm dd.MM.yyyy", $currentUser.CurrentTimeZoneId)</span>
+
+                    #if ($message.Score > 0)
+                        <strong>$msg.messageLikes:<span>$message.Score</strong>
+                    #end
+                    #if ($message.Replies > 0)
+                        $msg.replies: $message.Replies
+                    #end
+                </div>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+#end
+</ol>
+</div>
+</body>
+</html>

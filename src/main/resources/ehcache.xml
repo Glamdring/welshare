@@ -1,0 +1,103 @@
+<ehcache xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+    updateCheck="true" monitoring="autodetect" dynamicConfig="true">
+
+    <!-- other caches are defined directly in spring, caches.xml -->
+
+    <diskStore path="java.io.tmpdir"/>
+
+    <defaultCache
+        maxElementsInMemory="10000"
+        eternal="false"
+        timeToIdleSeconds="240"
+        timeToLiveSeconds="240"
+        overflowToDisk="false"
+        diskPersistent="false"
+        memoryStoreEvictionPolicy="LRU"
+        statistics="true" />
+
+    <cache
+        name="org.hibernate.cache.internal.StandardQueryCache"
+        maxElementsInMemory="10000"
+        eternal="false"
+        timeToLiveSeconds="120"
+        overflowToDisk="false" />
+
+    <cache
+        name="org.hibernate.cache.spi.UpdateTimestampsCache"
+        maxElementsInMemory="5000"
+        eternal="true"
+        overflowToDisk="false"/>
+
+    <!-- 1 hour -->
+    <cache
+        name="singleExternalMessageCache"
+        maxElementsInMemory="5000"
+        timeToLiveSeconds="3600"
+        overflowToDisk="false"/>
+
+    <!-- 12 hours -->
+    <cache
+        name="topRecentMessagesCache"
+        maxElementsInMemory="5000"
+        timeToLiveSeconds="43200"
+        overflowToDisk="false"/>
+
+    <!-- 10 minutes -->
+    <cache
+        name="readerCountCache"
+        maxElementsInMemory="5000"
+        timeToLiveSeconds="600"
+        overflowToDisk="false"/>
+
+    <!-- 12 hours-->
+    <cache
+        name="statisticsCache"
+        maxElementsInMemory="5000"
+        timeToLiveSeconds="43200"
+        overflowToDisk="false"/>
+
+    <!-- 4 hours -->
+    <cache
+        name="suggestedTimeToShareCache"
+        maxElementsInMemory="5000"
+        timeToLiveSeconds="14400"
+        overflowToDisk="false" />
+
+    <!-- 30 minutes -->
+    <cache
+        name="socialClientsCache"
+        maxElementsInMemory="5000"
+        timeToLiveSeconds="1800"
+        overflowToDisk="false"
+        statistics="true" />
+
+    <!-- 4 hours -->
+    <cache
+        name="oldMessagesCache"
+        maxElementsInMemory="5000"
+        timeToLiveSeconds="14400"
+        overflowToDisk="false" />
+
+    <!-- 5 minutes -->
+    <cache
+        name="analyticsCache"
+        maxElementsInMemory="5000"
+        timeToLiveSeconds="300"
+        overflowToDisk="false"/>
+
+    <!-- 4 hours -->
+    <cache
+        name="userPageCache"
+        maxElementsInMemory="5000"
+        timeToLiveSeconds="14400"
+        overflowToDisk="false" />
+
+    <!-- 12 hours -->
+    <cache
+        name="followersTrackingCache"
+        maxElementsInMemory="5000"
+        timeToLiveSeconds="43200"
+        overflowToDisk="false" />
+
+    <transactionManagerLookup class="net.sf.ehcache.transaction.manager.DefaultTransactionManagerLookup" />
+</ehcache>

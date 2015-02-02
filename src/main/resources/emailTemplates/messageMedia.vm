@@ -1,0 +1,11 @@
+#if (!$message.Data.VideoData && $message.PictureCount > 0)
+    #foreach ($pic in $message.Pictures)
+        #if (!$pic.External)
+            <a href="$pic.PublicUrl" target="_blank">
+                <img src="$web.addSuffix($pic.Path, '_small')" alt="" style="border-style: none;" />
+            </a>
+        #else
+            <a href="$pic.ExternalUrl" target="_blank"> <img src="$pic.Path" alt="" style="border-style: none;" /></a>
+        #end
+    #end
+#end

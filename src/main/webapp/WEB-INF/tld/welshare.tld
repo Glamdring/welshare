@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+    version="2.1">
+
+    <description>Welshare</description>
+    <tlib-version>1.0</tlib-version>
+    <short-name>functions</short-name>
+    <uri>http://welshare.com/tags</uri>
+
+    <tag>
+        <name>addResource</name>
+        <tag-class>com.welshare.web.util.tags.AddResourceTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>contentType</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>resourcePath</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>flushResources</name>
+        <tag-class>com.welshare.web.util.tags.FlushResourcesTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>contentType</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>assetsVersion</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>outputDateTime</name>
+        <tag-class>com.welshare.web.util.tags.OutputDateTimeTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>timeZone</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>dateTime</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>pattern</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <function>
+        <name>addSuffix</name>
+        <function-class>com.welshare.util.WebUtils</function-class>
+        <function-signature>String addSuffix(java.lang.String,
+            java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <name>escape</name>
+        <function-class>com.welshare.util.WebUtils</function-class>
+        <function-signature>String escape(java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <name>getFirstDayOfWeek</name>
+        <function-class>com.welshare.util.WebUtils</function-class>
+        <function-signature>int getFirstDayOfWeek()</function-signature>
+    </function>
+
+</taglib>

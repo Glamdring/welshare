@@ -1,0 +1,18 @@
+<span class="likePrefix">
+$msg.likes $msg.messageOf <a href="$baseUrl/$message.OriginalMessage.Author.Username">@$message.OriginalMessage.Author.Username</a>
+</span>
+
+#if ($message.Data.FormattedText.isEmpty())
+    <br />${message.Data.FormattedText}
+#end
+<div class="messageText likedText">
+<span>
+    #set (user = $message.OriginalMessage.Author)
+    #set (size = 32)
+    #set (cssStyle = " width: 32px; height: 32px; padding-right: 3px; vertical-align: middle; display: block; float: left; position: relative;")
+    #parse ("profilePicture.vm")
+</span>
+$message.OriginalMessage.Data.FormattedText <br />
+</div>
+#parse ("messageMedia.vm")
+

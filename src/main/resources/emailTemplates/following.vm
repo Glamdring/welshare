@@ -1,0 +1,33 @@
+<html>
+<div style="font-family: 'Lucida Grande', Helvetica, 'Helvetica Neue', Arial, Tahoma, sans-serif; font-size: 14px;">
+Hello $followed.Names,
+
+<a href="$baseUrl/$follower.Username">$follower.Names ($follower.Username)</a> has started following you on Weslhare:
+
+<div style="width: 60%; margin-left: auto; margin-right: auto; padding: 5px; margin-top: 15px;">
+    <div style="float: left; vertical-align: top;">
+        #set ($user = $follower)
+        #set ($size = 48)
+        #set ($cssStyle = "width: 48px; height: 48px; vertical-align: middle; display: block; float: left; position: relative; margin-right: 5px;")
+        #parse ("profilePicture.vm")
+
+    </div>
+    <div style="float: left; margin-left: 5px;">
+        #set ($targetUrl = "${baseUrl}/${follower.Username}")
+        <a style="font-weight: bold;" href="$targetUrl" target="_blank">
+            $follower.Names ($follower.Username)
+        </a><br />
+
+        ${msg.followers}: $follower.Followers<br />
+        ${msg.following}: $follower.Following<br />
+        ${msg.messageCount}: $follower.Messages<br />
+        ${msg.score}: $follower.Score<br />
+    </div>
+    <div style="float: left; margin-left: 25px;">
+        ${msg.bio}: ${follower.Profile.Bio}
+    </div>
+    <div style="clear: both;">
+    </div>
+</div>
+</body>
+</html>

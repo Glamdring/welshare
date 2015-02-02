@@ -1,0 +1,19 @@
+#if ($pictureType == 'small' && $user.SmallProfilePictureURI)
+    #set ($src = $user.SmallProfilePictureURI)
+#elseif ($pictureType == 'large' && $user.LargeProfilePictureURI)
+    #set ($src = $user.LargeProfilePictureURI)
+#elseif ($user.ProfilePictureURI)
+    #set ($src = $user.ProfilePictureURI)
+#else
+    #set ($src = "http://www.gravatar.com/avatar/${user.GravatarHash}?s=${size}&d=monsterid&r=PG")
+#end
+
+#if ($noExternal || !$user.External)
+    #set ($userUrl = "${baseUrl}/${user.Username}")
+#else
+    #set ($userUrl = $user.ExternalUrl)
+#end
+
+<a href="$userUrl">
+    <img src="$src" style="border-style: none;$cssStyle" />
+</a>
